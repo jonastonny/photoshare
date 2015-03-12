@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Photoshare 2000</title>
 </head>
 <body>
-
+<h1>Photoshare 2000</h1>
 </body>
 </html>
