@@ -1,4 +1,4 @@
-package dk.itu.controller;
+package dk.itu.photoshare.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
