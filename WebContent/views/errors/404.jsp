@@ -4,6 +4,6 @@
 <h1>404 - We are really sorry...</h1>
 <div class="alert alert-danger">
 	<span class="glyphicon glyphicon-exclamation-sign"></span>
-	But the pizza you have requested could not be served at the moment...
+	We could not find the page you were looking for...
 </div>
 </errors:wrap>
