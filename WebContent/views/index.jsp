@@ -5,6 +5,5 @@
 <!-- hertil?  FUCKING HER-->
 
 <index:wrap title="PhotoShare">
-<body>
 <h1>Photoshare 2000</h1>
 </index:wrap>
