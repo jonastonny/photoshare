@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS roles (
 	user_id int(11) NOT NULL AUTO_INCREMENT,
 	role varchar(100) NOT NULL,
 	PRIMARY KEY (user_id, role),
-	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS streams (
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS streams_users (
 	PRIMARY KEY (stream_id, user_id),
 	FOREIGN KEY (stream_id) REFERENCES streams(id) ON DELETE CASCADE,
 	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS streams_images (
 	stream_id int(11) NOT NULL,
@@ -56,4 +56,4 @@ CREATE TABLE IF NOT EXISTS streams_images (
 	PRIMARY KEY (stream_id, image_id),
 	FOREIGN KEY (stream_id) REFERENCES streams(id) ON DELETE CASCADE,
 	FOREIGN KEY (image_id) REFERENCES images(id) ON DELETE CASCADE
-)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
