@@ -8,7 +8,7 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="${pageContext.request.contextPath}"><img class="logo" alt="Brand" src="${pageContext.request.contextPath}/img/logo.png"></a>
+         <a class="navbar-brand" href="${pageContext.request.contextPath}">LOGO</a>
          
        </div>
        <div id="navbar" class="collapse navbar-collapse">
