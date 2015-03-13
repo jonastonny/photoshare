@@ -4,7 +4,6 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  
   <error-page>
     <error-code>404</error-code>
     <location>/views/errors/404.jsp</location>
@@ -21,8 +20,6 @@
     <servlet-name>default</servlet-name>
     <url-pattern>*.ico</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>
