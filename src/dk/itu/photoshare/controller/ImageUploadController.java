@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +17,12 @@ import javax.servlet.http.Part;
  * Servlet implementation class ImageController
  */
 @WebServlet("/ImageUploadController")
+@MultipartConfig
 public class ImageUploadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see HttpServlet#HttpServlet()	
      */
     public ImageUploadController() {
         super();
@@ -29,7 +32,8 @@ public class ImageUploadController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("views/images/upload.jsp");
+		view.forward(request, response);
 	}
 
 	/**
@@ -46,21 +50,25 @@ public class ImageUploadController extends HttpServlet {
 			System.out.println("size: " + image.getSize());
 			System.out.println("image type: " + image.getContentType());
 		}
-	    String imageName = getFileName(image);
-	    InputStream fileContent = image.getInputStream();
+	    String imageName = getImageName(image);
+		System.out.println(imageName);
+//	    InputStream fileContent = image.getInputStream();
 	    
-	    
-
 	}
 	
-	private static String getFileName(Part image) {
-	    for (String cd : image.getHeader("content-disposition").split(";")) {
-	        if (cd.trim().startsWith("filename")) {
-	            String fileName = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-	            return fileName.substring(fileName.lastIndexOf('/') + 1).substring(fileName.lastIndexOf('\\') + 1); // MSIE fix.
-	        }
-	    }
-	    return null;
+	private static String getImageName(Part image){
+		for (String cd: image.getHeader("content-disposition").split(";")){	// get content-disposition in array"
+			if(cd.trim().startsWith("filename")){	// trim if filename="file.jpg"
+				String imageName = cd.substring(cd.indexOf("=")+1).trim().replace("\"", ""); // get imageName and remove = and "
+				return imageName;
+			}
+		}
+		System.out.println("empty file");
+		return null;
+	}
+	
+	private static void uploadImageToDB(String imgURL, String description, String userID){
+		
 	}
 	
 
