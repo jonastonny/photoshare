@@ -14,7 +14,7 @@ import javax.servlet.http.Part;
 /**
  * Servlet implementation class ImageController
  */
-@WebServlet("/ImageController")
+@WebServlet("/ImageUploadController")
 public class ImageUploadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

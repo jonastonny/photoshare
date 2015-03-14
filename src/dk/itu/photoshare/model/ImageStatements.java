@@ -13,6 +13,15 @@ public class ImageStatements {
 	ResultSet rs;
 	DBConnect c;
 	
+	public ImageStatements() {
+        try {
+        	c = new DBConnect();
+			this.conn = c.getCon();
+        } catch (Exception ex) {
+        	ex.getMessage();
+        }
+    }
+	
 	public String showImage (int id, int user_id) {
 		try {
 			PreparedStatement pstmt = c.preparedStatement("SELECT images.url AS imageURL FROM images WHERE id ='?' AND user_id ='?';");
@@ -22,7 +31,7 @@ public class ImageStatements {
 			if(rs.next()) return rs.getString("imageURL");
 		}
 		catch (Exception e1) {
-			System.out.println(e1.getMessage());;
+			System.out.println(e1.getMessage());
 		}
 		return "No image for you, sir";
 	}
