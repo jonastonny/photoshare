@@ -30,7 +30,6 @@ public class ImageStatements {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				Image i = new Image(rs.getString("imageURL"), rs.getString("imageDescription"));
-				System.out.println(i.getURL() + i.getDescription());
 				return i;
 			}
 		}
