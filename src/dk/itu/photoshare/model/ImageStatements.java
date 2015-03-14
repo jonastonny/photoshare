@@ -22,17 +22,17 @@ public class ImageStatements {
         }
     }
 	
-	public String showImage (int id, int user_id) {
+	public String showImage (String id, String user_id) {
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT images.url AS imageURL FROM images WHERE id ='?' AND user_id ='?';");
-			pstmt.setInt(1, id);
-			pstmt.setInt(2, user_id);
+			PreparedStatement pstmt = c.preparedStatement("SELECT images.url AS imageURL FROM images WHERE id =? AND user_id =?;");
+			pstmt.setString(1, id);
+			pstmt.setString(2, user_id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) return rs.getString("imageURL");
 		}
 		catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}
-		return "No image for you, sir";
+		return "images/ctrlpee.png";
 	}
 }

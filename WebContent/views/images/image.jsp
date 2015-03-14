@@ -11,4 +11,7 @@
 		</c:when>
 		<c:otherwise>Intet at vise her</c:otherwise>
 	</c:choose>
+	<br>
+	Testbilled fra db:<br>
+	<img src="${imageURL}">
 </image:wrap>
