@@ -3,11 +3,8 @@
 
 <image:wrap title="PhotoShare - Image">
 	<h1>Image</h1>
-	
-	<c:choose>
-		<c:when test="<!-- INDSÆT TRUE FALSE SOMETHING -->">
-			<!-- Indsæt billede fra parametre -->
-		</c:when>
-		<c:otherwise>Intet at vise her</c:otherwise>
-	</c:choose>
+	<div class="container" align="center">
+		<img src="${image.getURL()}">
+		<p >${image.getDescription()}</p>
+	</div>
 </image:wrap>

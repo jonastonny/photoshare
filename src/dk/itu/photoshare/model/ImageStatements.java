@@ -18,18 +18,31 @@ public class ImageStatements {
 	ResultSet rs;
 	DBConnect c;
 	
-	public String showImage (int id, int user_id) {
+	public ImageStatements() {
+        try {
+        	c = new DBConnect();
+			this.conn = c.getCon();
+        } catch (Exception ex) {
+        	ex.getMessage();
+        }
+    }
+	
+	public Image showImage (String id, String user_id) {
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT images.url AS imageURL FROM images WHERE id ='?' AND user_id ='?';");
-			pstmt.setInt(1, id);
-			pstmt.setInt(2, user_id);
+			PreparedStatement pstmt = c.preparedStatement("SELECT images.url AS imageURL, images.description AS imageDescription FROM images WHERE id =? AND user_id =?;");
+			pstmt.setString(1, id);
+			pstmt.setString(2, user_id); // TODO hent fra session
 			rs = pstmt.executeQuery();
-			if(rs.next()) return rs.getString("imageURL");
+			if(rs.next()) {
+				Image i = new Image(rs.getString("imageURL"), rs.getString("imageDescription"));
+				return i;
+			}
 		}
 		catch (Exception e1) {
-			System.out.println(e1.getMessage());;
+			System.out.println(e1.getMessage());
 		}
-		return "No image for you, sir";
+		// error pic
+		return new Image();
 	}
 	
 	
