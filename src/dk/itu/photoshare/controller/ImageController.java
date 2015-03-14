@@ -33,8 +33,7 @@ public class ImageController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
 		ImageStatements is = new ImageStatements();
-		request.setAttribute("imageURL", is.showImage(request.getParameter("id"), "1"));
-//		String imageURL = is.showImage(request.getParameter("id"), "1");
+		request.setAttribute("image", is.showImage(request.getParameter("id"), "1")); // TODO hardcoded userid, skal tages fra session
 		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp?id="+id);
 		view.forward(request, response);
 	}
