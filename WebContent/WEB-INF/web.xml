@@ -24,6 +24,14 @@
     <servlet-name>LoginController</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ImageUploadController</servlet-name>
+    <servlet-class>dk.itu.photoshare.controller.ImageUploadController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ImageUploadController</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.ico</url-pattern>
