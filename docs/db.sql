@@ -57,3 +57,13 @@ CREATE TABLE IF NOT EXISTS streams_images (
 	FOREIGN KEY (stream_id) REFERENCES streams(id) ON DELETE CASCADE,
 	FOREIGN KEY (image_id) REFERENCES images(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+/*
+ INSERT DUMMY DATA
+ */
+INSERT INTO users (username, password) VALUES ('admin', 'abcDEFG123#');
+INSERT INTO roles (user_id, role) VALUES (1, 'admin');
+
+

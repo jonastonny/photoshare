@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PageController
+ * Servlet implementation class CreateUserController
  */
-@WebServlet("/")
-public class PageController extends HttpServlet {
+@WebServlet("/CreateUserController")
+public class CreateUserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PageController() {
+    public CreateUserController() {
         super();
     }
 
@@ -27,7 +27,7 @@ public class PageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/index.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/user/create.jsp");
 		view.forward(request, response);
 	}
 
@@ -35,7 +35,7 @@ public class PageController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
 	}
 
 }

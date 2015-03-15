@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dk.itu.photoshare.model.CommentStatements;
 import dk.itu.photoshare.model.ImageStatements;
 
 /**
@@ -31,10 +32,12 @@ public class ImageController extends HttpServlet {
 	 */    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id = request.getParameter("id");
+//		String id = request.getParameter("id");
 		ImageStatements is = new ImageStatements();
-		request.setAttribute("image", is.showImage(request.getParameter("id"), "1")); // TODO hardcoded userid, skal tages fra session
-		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp?id="+id);
+		CommentStatements cs = new CommentStatements();
+		request.setAttribute("image", is.showImage(request.getParameter("id"), "1"));// TODO hardcoded userid, skal tages fra session
+		request.setAttribute("comments", cs.showComment("id"));
+		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
 		view.forward(request, response);
 	}
 

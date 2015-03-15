@@ -5,6 +5,19 @@
 	<h1>Image</h1>
 	<div class="container" align="center">
 		<img src="${image.getURL()}">
-		<p >${image.getDescription()}</p>
+		<p>${image.getDescription()}</p>
+		<p>Comments</p>
 	</div>
+	<table>
+		<c:forEach var="comments" items="${comments}">
+			<tr>
+				<td>
+				<p>${comments.userId}</p>
+				</td>
+				<td>
+				<p>${comments.body}</p>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
 </image:wrap>
