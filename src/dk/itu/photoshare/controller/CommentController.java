@@ -1,44 +1,33 @@
 package dk.itu.photoshare.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dk.itu.photoshare.model.CommentStatements;
-import dk.itu.photoshare.model.ImageStatements;
-
 /**
- * Servlet implementation class ImageController
+ * Servlet implementation class CommentController
  */
-@WebServlet("/ImageController")
-public class ImageController extends HttpServlet {
+@WebServlet("/CommentController")
+public class CommentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ImageController() {
+    public CommentController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */    
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		String id = request.getParameter("id");
-		ImageStatements is = new ImageStatements();
-		CommentStatements cs = new CommentStatements();
-		request.setAttribute("image", is.showImage(request.getParameter("id"), "1"));// TODO hardcoded userid, skal tages fra session
-		request.setAttribute("comments", cs.showComment("id"));
-		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
-		view.forward(request, response);
+		// VÆLG DEN METODE DU VIL BRUG FRA MODEL OG SAMMENSÆT MED DIN HTML FORM 
 	}
 
 	/**
@@ -46,7 +35,6 @@ public class ImageController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
