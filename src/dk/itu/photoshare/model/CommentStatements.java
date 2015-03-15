@@ -53,8 +53,6 @@ public class CommentStatements {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-//				String username = getUserName(rs.getString("userid"));
-//				System.out.println(username);
 				comments.add(new Comment(rs.getString("users.username"), rs.getString("comments.body")));
 			}
 						
@@ -65,19 +63,12 @@ public class CommentStatements {
 		return comments;
 	}
 	
-	public String getUserName (String userId) {
+	public void deleteComment() {
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT username FROM users WHERE id=?;");
-			pstmt.setString(1, userId);
-			rs = pstmt.executeQuery();
-			if(rs.next()){
-				String username = rs.getString("username");
-				return username;
-			}
+			PreparedStatement pstmt = c.preparedStatement("DELETE FROM comments WHERE comment.id=? AND ;");
 		}
-		catch (Exception e1) {
+		catch(Exception e1) {
 			System.out.println(e1.getMessage());
 		}
-		return "no username";
 	}
 }
