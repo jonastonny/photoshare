@@ -27,11 +27,7 @@ public class LoginStatements {
     
     public boolean login(String username, String pwd) {
     	try {
-			pwd = hash256(pwd);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-    	try {
+    		pwd = hash256(pwd);
     		pstmt = c.preparedStatement("SELECT username, password FROM users WHERE username =?;");
     		pstmt.setString(1, username);
     		rs = pstmt.executeQuery();

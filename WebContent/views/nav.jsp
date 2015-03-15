@@ -13,8 +13,15 @@
        </div>
        <div id="navbar" class="collapse navbar-collapse">
          <ul class="nav navbar-nav">
-           <li><a href="login">Login</a></li>
-		   <li><a href="#">Link 01</a></li>
+         <c:choose>
+         	<c:when test="${user eq null}"> <!-- NOT LOGGED IN -->
+           		<li><a href="login">Login</a></li>
+		   		<li><a href="signup">Sign Up</a></li>
+         	</c:when>
+         	<c:otherwise>
+         		<li><a href="logout">Logout</a></li> <!-- LOGGED IN -->
+         	</c:otherwise>
+         </c:choose>
          </ul>
        </div><!--/.nav-collapse -->
      </div>

@@ -24,6 +24,14 @@
     <servlet-name>LoginController</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>LogoutController</servlet-name>
+    <servlet-class>dk.itu.photoshare.controller.LogoutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutController</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>ImageController</servlet-name>
     <servlet-class>dk.itu.photoshare.controller.ImageController</servlet-class>
@@ -40,6 +48,14 @@
     <servlet-name>ImageUploadController</servlet-name>
     <url-pattern>/upload</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CreateUserController</servlet-name>
+    <servlet-class>dk.itu.photoshare.controller.CreateUserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateUserController</servlet-name>
+    <url-pattern>/signup</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.ico</url-pattern>
@@ -52,7 +68,7 @@
     <servlet-name>default</servlet-name>
     <url-pattern>*.png</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.gif</url-pattern>
   </servlet-mapping>

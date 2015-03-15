@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/login/index.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/user/login.jsp");
 		view.forward(request, response);
 	}
 
@@ -51,7 +51,7 @@ public class LoginController extends HttpServlet {
 		}
 		else {
 			request.setAttribute("error", "Username or password was incorrect");
-			RequestDispatcher view = request.getRequestDispatcher("views/login/index.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/user/login.jsp");
 			view.forward(request, response);
 		}
 	}
