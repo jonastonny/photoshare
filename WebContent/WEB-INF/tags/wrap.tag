@@ -10,7 +10,7 @@
 		<link href="${pageContext.request.contextPath}/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-		<title>${title}</title>
+		<title>PhotoShare - ${title}</title>
 	</head>
 	<body>
 	
