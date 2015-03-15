@@ -1,13 +1,14 @@
 package dk.itu.photoshare.model;
 
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 import dk.itu.photoshare.model.DBConnect;
 
@@ -46,22 +47,33 @@ public class ImageStatements {
 	}
 	
 	
-	public static void uploadImgToDB(String imgURL, String description, String userID){
-		
+	public void uploadImgToDB(String imgURL, String description, String user_id){
+		try {
+			PreparedStatement pstmt = c.preparedStatement("INSERT INTO images (url, user_id, description) VALUES(?, ?, ?);");
+			pstmt.setString(1, imgURL);
+			pstmt.setInt(2, Integer.parseInt(user_id));
+			pstmt.setString(3, description);
+			pstmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
-	public static void uploadImgToServer(String imageName, String username, InputStream imageContent){
-		String upload = "/images/";
-		File file = new File(upload, (username + imageName));
-		System.out.println(file.toPath());
-		System.out.println(imageContent.toString());
-
-
-		try (InputStream input = imageContent) {
-				Files.copy(input, file.toPath());	// copy the content of the imageContent to the hardcoded path
-				System.out.println("File succesfully uploaded to server");
-			} catch (IOException e) {
-				System.out.println(e);
+	public static String uploadImgToServer(String imageName, String username, InputStream imageContent, String path){
+		String uniqueID = Integer.toString(imageContent.hashCode());
+		String fileName =  uniqueID + username + imageName;
+		String directory = path + fileName;
+		try {
+			OutputStream output = new FileOutputStream(directory); 
+			IOUtils.copy(imageContent, output);
+			System.out.println("File succesfully uploaded to server");
+		    output.flush();
+		    output.close();
+		    return fileName;
+		} catch (IOException e) {
+			System.out.println(e);
+			return null;
 		}
 	}
 	

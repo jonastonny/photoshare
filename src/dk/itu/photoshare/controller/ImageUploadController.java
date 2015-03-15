@@ -3,7 +3,6 @@ package dk.itu.photoshare.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.File;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
 import dk.itu.photoshare.model.ImageStatements;
 
 /**
@@ -45,23 +43,16 @@ public class ImageUploadController extends HttpServlet {
 		String description = request.getParameter("description");
 		String user_id = "1";	// hardcoded - will be set by sessionParameter
 		String username = "test"; // hardcoded - will be set by sessionParameter
-		System.out.println("what up?");
-		Part image = request.getPart("image");
-		
+		String appPath = request.getServletContext().getRealPath("");	
+	    String savePath = appPath + "/images/";	// construct path of the directory to save uploaded file
+		Part image = request.getPart("image");	// get image
 		
 		if(image != null){
-			System.out.println("image: " + image.getName());
-			System.out.println("size: " + image.getSize());
-			System.out.println("image type: " + image.getContentType());
-		    String imageName = getImageName(image);
-			System.out.println(imageName);
+		    String imgName = getImageName(image);
 			InputStream imageContent = image.getInputStream();
-			
-			
-			
-			System.out.println(getServletContext().getContextPath());
 			ImageStatements upload = new ImageStatements();
-			upload.uploadImgToServer(imageName, username, imageContent);
+			String imgURL = upload.uploadImgToServer(imgName, username, imageContent, savePath);
+			upload.uploadImgToDB(imgURL, description, user_id);
 		}
 		else{
 		System.out.println("The image wasn't chosen to be uploaded");
