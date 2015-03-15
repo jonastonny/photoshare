@@ -48,14 +48,14 @@ public class CommentStatements {
 		ArrayList<Comment> comments = new ArrayList<Comment>();
 		
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT user_id AS userid, body AS comment FROM comments WHERE image_id=? ;");
+			PreparedStatement pstmt = c.preparedStatement("SELECT users.username, comments.body FROM users, comments WHERE users.id = comments.user_id AND comments.image_id=?;");
 			pstmt.setString(1, image_id);
 			rs = pstmt.executeQuery();
-
+			
 			while(rs.next()) {
-				String username = getUserName(rs.getString("userid"));
-				System.out.println(username);
-				comments.add(new Comment(username, rs.getString("comment")));
+//				String username = getUserName(rs.getString("userid"));
+//				System.out.println(username);
+				comments.add(new Comment(rs.getString("users.username"), rs.getString("comments.body")));
 			}
 						
 		}
