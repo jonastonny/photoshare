@@ -31,6 +31,8 @@ public class CommentStatements {
 			if (rs.next()){
 				result = rs.getInt("image_id");
 			}
+			
+			System.out.println("I have now counted the comments");
 			return result; 
 			
 		} catch (Exception e) {
