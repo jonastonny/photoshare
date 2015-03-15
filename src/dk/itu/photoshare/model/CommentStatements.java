@@ -42,14 +42,13 @@ public class CommentStatements {
 	}
 	
 	
-	public Comment[] showComment (String image_id, String comment) {
+	public Comment[] showComment (String image_id) {
 		
 		Comment[] comments = new Comment[countComments(image_id)];
 		
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT user_id AS User , body AS Comment FROM comments WHERE image_id =? AND user_id =?;");
+			PreparedStatement pstmt = c.preparedStatement("SELECT user_id AS User, body AS Comment FROM comments WHERE image_id =?;");
 			pstmt.setString(1, image_id);
-			pstmt.setString(2, comment); // TODO hent fra session
 			rs = pstmt.executeQuery();
 			
 			for (int i = 0 ; i < comments.length ; i++){
