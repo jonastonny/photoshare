@@ -5,6 +5,6 @@
 	<h1>Image</h1>
 	<div class="container" align="center">
 		<img src="${image.getURL()}">
-		<p >${image.getDescription()}</p>
+		<p>${image.getDescription()}</p>
 	</div>
 </image:wrap>
