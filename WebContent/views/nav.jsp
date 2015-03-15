@@ -8,12 +8,12 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="${pageContext.request.contextPath}">LOGO</a>
+         <a class="navbar-brand" href="${pageContext.request.contextPath}">PhotoShare</a>
          
        </div>
        <div id="navbar" class="collapse navbar-collapse">
          <ul class="nav navbar-nav">
-           <li><a href="#">Link 00</a></li>
+           <li><a href="login">Login</a></li>
 		   <li><a href="#">Link 01</a></li>
          </ul>
        </div><!--/.nav-collapse -->
