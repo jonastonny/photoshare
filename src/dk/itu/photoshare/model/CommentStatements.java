@@ -47,19 +47,24 @@ public class CommentStatements {
 		Comment[] comments = new Comment[countComments(image_id)];
 		
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT user_id AS User, body AS Comment FROM comments WHERE image_id =?;");
+			PreparedStatement pstmt = c.preparedStatement("SELECT user_id AS User, body AS Comment FROM comments WHERE image_id=?;");
 			pstmt.setString(1, image_id);
 			rs = pstmt.executeQuery();
 			
+			
 			for (int i = 0 ; i < comments.length ; i++){
-				comments[i] = new Comment(rs.getString("image_id"), rs.getString("comment"));
+				comments[i] = new Comment(rs.getString("User"), rs.getString("Comment"));
+			}
+			for(int j = 0; j < comments.length; j++) {
+				System.out.println(comments.length);
+				System.out.println(comments[j]);
 			}
 			
 		}
 		catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}
-
+		System.out.println("Fuck this shit");
 		return comments;
 	}
 }
