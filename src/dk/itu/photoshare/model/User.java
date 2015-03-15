@@ -4,11 +4,7 @@ public class User {
 	
 	private int id;
 	private String username;
-	
-	public User(int id, String username) {
-		this.id = id;
-		this.username = username;
-	}
+	private String role;
 	
 	public int getId() {
 		return id;
@@ -25,4 +21,13 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 }
