@@ -8,8 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dk.itu.photoshare.model.CommentStatements;
+import dk.itu.photoshare.model.ImageStatements;
+import dk.itu.photoshare.model.User;
 
 /**
  * Servlet implementation class ViewImageController
@@ -33,8 +36,23 @@ public class ViewImageController extends HttpServlet {
 		
 		String id = request.getParameter("id");
 		
-		CommentStatements cs = new CommentStatements();
+		ImageStatements is = new ImageStatements();
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
 		
+		if(user == null) {
+			request.setAttribute("error", "U no user");
+			request.getRequestDispatcher("views/index.jsp").forward(request, response);
+			return;
+		}
+		
+		if(!is.hasPerm(Integer.toString(user.getId()), id)) {
+			request.setAttribute("error", "Has no perm");
+			request.getRequestDispatcher("views/index.jsp").forward(request, response);
+			return;
+		}			
+		
+		CommentStatements cs = new CommentStatements();
 		request.setAttribute("comments", cs.showComment(id));
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
