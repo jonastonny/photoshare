@@ -22,6 +22,7 @@
          		<li><a href="logout">Logout</a></li> <!-- LOGGED IN -->
          	</c:otherwise>
          </c:choose>
+         <li><p class="nav-text">${user.role}</p></li>
          </ul>
        </div><!--/.nav-collapse -->
      </div>
