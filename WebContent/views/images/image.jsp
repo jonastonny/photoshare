@@ -25,4 +25,12 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	
+	<div>
+		<form method="POST" action="comment">
+			<textarea class="form-control" name="comment" rows="3" placeholder="Leave a comment..."></textarea>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+	
 </image:wrap>
