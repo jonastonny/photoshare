@@ -36,7 +36,6 @@ public class ImageController extends HttpServlet {
      */
     public ImageController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -49,6 +48,8 @@ public class ImageController extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
+//			response.setContentType("image/jpg");
+			
 			byte[] img = is.showImage(id, Integer.toString(user.getId()));
 			if (img != null){				
 				response.setContentType("image/jpg");

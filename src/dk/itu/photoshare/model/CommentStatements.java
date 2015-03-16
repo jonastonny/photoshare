@@ -3,6 +3,7 @@ package dk.itu.photoshare.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CommentStatements {
@@ -72,4 +73,18 @@ public class CommentStatements {
 			System.out.println(e1.getMessage());
 		}
 	}
+	
+	public void createComment(String comment, int image_id, int user_id) {
+		try{
+			PreparedStatement pstmt = c.preparedStatement("INSERT INTO comments (body, image_id, user_id) VALUES (?,?,?)");
+			pstmt.setString(1, comment);
+			pstmt.setInt(2, image_id);
+			pstmt.setInt(3, user_id);
+			pstmt.executeUpdate();
+			System.out.println("comment added to db");
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
+	
 }
