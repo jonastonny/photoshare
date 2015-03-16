@@ -1,11 +1,15 @@
 package dk.itu.photoshare.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dk.itu.photoshare.model.CommentStatements;
+import dk.itu.photoshare.model.User;
 
 /**
  * Servlet implementation class CreateCommentController
@@ -33,8 +37,11 @@ public class CreateCommentController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String comment = request.getParameter("comment");
-		
-		
+		int image_id = Integer.parseInt(request.getParameter("id"));
+		User user = (User) request.getSession().getAttribute("user");
+		int user_id = user.getId();
+		CommentStatements sm = new CommentStatements();
+		sm.createComment(comment, image_id, user_id);
 	}
 
 }
