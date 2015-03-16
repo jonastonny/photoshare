@@ -1,6 +1,9 @@
 package dk.itu.photoshare.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+
 import dk.itu.photoshare.model.CommentStatements;
+import dk.itu.photoshare.model.Image;
 import dk.itu.photoshare.model.ImageStatements;
 
 
@@ -47,8 +53,13 @@ public class ImageController extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
+			Image img = is.showImage(id, Integer.toString(user.getId()));
+			InputStream imgContent = img.getURL().getBinaryStream();
+			OutputStream out = response.getOutputStream();
+			IOUtils.copy(imgContent,out);
+			response.setContentType("image/jpg");
 			
-			request.setAttribute("image", is.showImage(id, Integer.toString(user.getId())));// TODO hardcoded userid, skal tages fra session
+//			request.setAttribute("image", );// TODO hardcoded userid, skal tages fra session
 			request.setAttribute("comments", cs.showComment(imageId));
 		}
 		catch (Exception e) {
