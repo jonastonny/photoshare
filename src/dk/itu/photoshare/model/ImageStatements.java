@@ -24,22 +24,21 @@ public class ImageStatements {
         }
     }
 	
-	public Image showImage (String id, String user_id) {
+	public byte[] showImage (String id, String user_id) {
 		try {
 			PreparedStatement pstmt = c.preparedStatement("SELECT images.image AS imageURL, images.description AS imageDescription FROM images WHERE id =? AND user_id =?;");
 			pstmt.setString(1, id);
 			pstmt.setString(2, user_id); 
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				Image i = new Image(rs.getBlob("imageURL"), rs.getString("imageDescription"));
-				return i;
+				byte[] content = rs.getBytes("imageURL");
+				return content;
 			}
 		}
 		catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}
-		// error pic
-		return new Image();
+		return null;
 	}
 	
 	
