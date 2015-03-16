@@ -31,7 +31,7 @@ public class ImageStatements {
 			pstmt.setString(2, user_id); 
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				Image i = new Image(rs.getString("imageURL"), rs.getString("imageDescription"));
+				Image i = new Image(rs.getBlob("imageURL"), rs.getString("imageDescription"));
 				return i;
 			}
 		}
