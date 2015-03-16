@@ -3,6 +3,7 @@ package dk.itu.photoshare.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class CommentStatements {
 	
@@ -42,24 +43,41 @@ public class CommentStatements {
 	}
 	
 	
-	public Comment[] showComment (String image_id) {
+	public ArrayList<Comment> showComment (String image_id) {
 		
-		Comment[] comments = new Comment[countComments(image_id)];
+		ArrayList<Comment> comments = new ArrayList<Comment>();
 		
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT user_id AS User, body AS Comment FROM comments WHERE image_id =?;");
+			PreparedStatement pstmt = c.preparedStatement("SELECT users.username, comments.body FROM users, comments WHERE users.id = comments.user_id AND comments.image_id=?;");
 			pstmt.setString(1, image_id);
 			rs = pstmt.executeQuery();
 			
-			for (int i = 0 ; i < comments.length ; i++){
-				comments[i] = new Comment(rs.getString("image_id"), rs.getString("comment"));
+			while(rs.next()) {
+//				String username = getUserName(rs.getString("userid"));
+//				System.out.println(username);
+				comments.add(new Comment(rs.getString("users.username"), rs.getString("comments.body")));
 			}
-			
+						
 		}
 		catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}
-
 		return comments;
+	}
+	
+	public String getUserName (String userId) {
+		try {
+			PreparedStatement pstmt = c.preparedStatement("SELECT username FROM users WHERE id=?;");
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				String username = rs.getString("username");
+				return username;
+			}
+		}
+		catch (Exception e1) {
+			System.out.println(e1.getMessage());
+		}
+		return "no username";
 	}
 }

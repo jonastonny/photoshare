@@ -4,6 +4,8 @@
 <imageUpload:wrap title="Upload Image">
 <h1>Upload Image</h1>
 
+<c:if test="${error != null}"><div class="alert alert-warning"><p class="msg">${error}</p></div></c:if>
+
 <form action="upload" method="post" enctype="multipart/form-data">
     Select image to upload:<br>
     <input type="file" name="image" id="image">

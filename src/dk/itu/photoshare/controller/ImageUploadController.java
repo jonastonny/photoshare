@@ -3,7 +3,6 @@ package dk.itu.photoshare.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.File;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,14 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
 import dk.itu.photoshare.model.ImageStatements;
 
 /**
  * Servlet implementation class ImageController
  */
 @WebServlet("/ImageUploadController")
-@MultipartConfig
+@MultipartConfig(maxFileSize=1024*1024*10,      // 10MB
+                 maxRequestSize=1024*1024*50)
 public class ImageUploadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,26 +44,27 @@ public class ImageUploadController extends HttpServlet {
 		String description = request.getParameter("description");
 		String user_id = "1";	// hardcoded - will be set by sessionParameter
 		String username = "test"; // hardcoded - will be set by sessionParameter
-		System.out.println("what up?");
-		Part image = request.getPart("image");
+		String appPath = request.getServletContext().getRealPath("");	
+	    String savePath = appPath + "/images/";	// construct path of the directory to save uploaded file
+		Part image = request.getPart("image");	// get image
+		System.out.println(image.getSize());
 		
+
 		
-		if(image != null){
-			System.out.println("image: " + image.getName());
-			System.out.println("size: " + image.getSize());
-			System.out.println("image type: " + image.getContentType());
-		    String imageName = getImageName(image);
-			System.out.println(imageName);
+		if(!(image.getSize() <= 0)){
+		    String imgName = getImageName(image);
 			InputStream imageContent = image.getInputStream();
-			
-			
-			
-			System.out.println(getServletContext().getContextPath());
 			ImageStatements upload = new ImageStatements();
-			upload.uploadImgToServer(imageName, username, imageContent);
+			String imgURL = upload.uploadImgToServer(imgName, username, imageContent, savePath);
+			upload.uploadImgToDB(imgURL, description, user_id);
+			RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
+			view.forward(request, response);
 		}
 		else{
-		System.out.println("The image wasn't chosen to be uploaded");
+			System.out.println("No image to upload");
+			request.setAttribute("error", "An error occurred, please try uploading youre image again");
+			RequestDispatcher view = request.getRequestDispatcher("views/images/upload.jsp");
+			view.forward(request, response);
 		}
 	}
 	

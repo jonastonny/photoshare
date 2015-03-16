@@ -6,9 +6,9 @@
 	<div class="container" align="center">
 		<img src="${image.getURL()}">
 		<p>${image.getDescription()}</p>
-	<p>Comments</p>
+		<p>Comments</p>
 	</div>
-	<table>
+	<table class="table">
 		<c:forEach var="comments" items="${comments}">
 			<tr>
 				<td>
