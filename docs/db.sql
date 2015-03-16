@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS images (
 	id int(11) NOT NULL AUTO_INCREMENT,
-	image blob NOT NULL,
+	image longblob NOT NULL,
 	user_id int(11) NOT NULL,
 	description varchar(1000),
 	PRIMARY KEY (id)
