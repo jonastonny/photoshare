@@ -12,7 +12,11 @@ import javax.servlet.http.HttpSession;
 
 import dk.itu.photoshare.model.CommentStatements;
 import dk.itu.photoshare.model.ImageStatements;
+
+
+
 import dk.itu.photoshare.model.User;
+
 
 /**
  * Servlet implementation class ImageController
@@ -33,23 +37,35 @@ public class ImageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
 		// TODO Auto-generated method stub
 		String imageId = request.getParameter("id");
 		
 		ImageStatements is = new ImageStatements();
 		CommentStatements cs = new CommentStatements();
+		String imgPath = request.getServletContext().getRealPath("") + "/images/";
+		System.out.println(imgPath);
 		
+		String path2 = request.getContextPath();
+		System.out.println(path2+"/WebContent/images");
+		
+		
+
+		request.setAttribute("image", is.showImage("16", imgPath, "1"));// TODO hardcoded userid, skal tages fra session
+		request.setAttribute("comments", cs.showComment(id));
+
 		try {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
 			
-			request.setAttribute("image", is.showImage(imageId, Integer.toString(user.getId())));// TODO hardcoded userid, skal tages fra session
+			request.setAttribute("image", is.showImage("id",Integer.toString(user.getId()),"1"));// TODO hardcoded userid, skal tages fra session
 			request.setAttribute("comments", cs.showComment(imageId));
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			request.setAttribute("error", "Doh! Please login to see pictures");
 		}
+
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
 		
@@ -60,7 +76,6 @@ public class ImageController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 	}
 

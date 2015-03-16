@@ -28,14 +28,14 @@ public class ImageStatements {
         }
     }
 	
-	public Image showImage (String id, String user_id) {
+	public Image showImage (String id, String imgPath, String user_id) {
 		try {
 			PreparedStatement pstmt = c.preparedStatement("SELECT images.url AS imageURL, images.description AS imageDescription FROM images WHERE id =? AND user_id =?;");
 			pstmt.setString(1, id);
 			pstmt.setString(2, user_id); // TODO hent fra session
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				Image i = new Image(rs.getString("imageURL"), rs.getString("imageDescription"));
+				Image i = new Image(imgPath + rs.getString("imageURL"), rs.getString("imageDescription"));
 				return i;
 			}
 		}
