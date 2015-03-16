@@ -9,17 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dk.itu.photoshare.model.CommentStatements;
+
 /**
- * Servlet implementation class TestController
+ * Servlet implementation class ViewImageController
  */
-@WebServlet("/TestController")
-public class TestController extends HttpServlet {
+@WebServlet("/ViewImageController")
+public class ViewImageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestController() {
+    public ViewImageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +30,14 @@ public class TestController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/test.jsp");
+		
+		String id = request.getParameter("id");
+		
+		CommentStatements cs = new CommentStatements();
+		
+		request.setAttribute("comments", cs.showComment(id));
+		
+		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
 		view.forward(request, response);
 	}
 
