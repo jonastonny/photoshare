@@ -36,7 +36,6 @@ public class ImageController extends HttpServlet {
      */
     public ImageController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -44,8 +43,6 @@ public class ImageController extends HttpServlet {
 	 */    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		// TODO Auto-generated method stub
-		String imageId = request.getParameter("id");
 		
 		ImageStatements is = new ImageStatements();
 		CommentStatements cs = new CommentStatements();
@@ -57,10 +54,11 @@ public class ImageController extends HttpServlet {
 			InputStream imgContent = img.getURL().getBinaryStream();
 			OutputStream out = response.getOutputStream();
 			IOUtils.copy(imgContent,out);
-			response.setContentType("image/jpg");
+//			response.setContentType("image/jpg");
 			
-//			request.setAttribute("image", );// TODO hardcoded userid, skal tages fra session
-			request.setAttribute("comments", cs.showComment(imageId));
+			request.setAttribute("image", out);// TODO hardcoded userid, skal tages fra session
+			request.setAttribute("comments", cs.showComment(id));
+			
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());

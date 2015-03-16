@@ -7,7 +7,7 @@
 	
 	<c:if test="${image != null}">
 		<div class="container" align="center">
-			<img src="${image.getURL()}">
+			<img src="${image}">
 			<p>${image.getDescription()}</p>
 		</div>
 	</c:if>
