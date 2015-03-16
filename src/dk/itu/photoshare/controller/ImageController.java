@@ -43,22 +43,12 @@ public class ImageController extends HttpServlet {
 		
 		ImageStatements is = new ImageStatements();
 		CommentStatements cs = new CommentStatements();
-		String imgPath = request.getServletContext().getRealPath("") + "/images/";
-		System.out.println(imgPath);
-		
-		String path2 = request.getContextPath();
-		System.out.println(path2+"/WebContent/images");
-		
-		
-
-		request.setAttribute("image", is.showImage("16", imgPath, "1"));// TODO hardcoded userid, skal tages fra session
-		request.setAttribute("comments", cs.showComment(id));
 
 		try {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
 			
-			request.setAttribute("image", is.showImage("id",Integer.toString(user.getId()),"1"));// TODO hardcoded userid, skal tages fra session
+			request.setAttribute("image", is.showImage("19",Integer.toString(user.getId())));// TODO hardcoded userid, skal tages fra session
 			request.setAttribute("comments", cs.showComment(imageId));
 		}
 		catch (Exception e) {
