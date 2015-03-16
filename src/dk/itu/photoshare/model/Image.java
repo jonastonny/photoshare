@@ -1,21 +1,22 @@
 package dk.itu.photoshare.model;
 
+import java.sql.Blob;
+
 public class Image {
 	
-	String imageURL;
+	Blob imageURL;
 	String imageDescription;
 	
-	public Image(String url, String description) {
-		imageURL = url;
+	public Image(Blob blob, String description) {
+		imageURL = blob;
 		imageDescription = description;
 	}
 	
 	public Image(){
-		imageURL = "images/ctrlpee.png";
 		imageDescription = "ERROR";
 	}
 	
-	public String getURL() {
+	public Blob getURL() {
 		return imageURL;
 	}
 	
