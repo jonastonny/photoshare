@@ -44,21 +44,20 @@ public class ImageController extends HttpServlet {
 	 */    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		String imageId = request.getParameter("id");
-		
 		ImageStatements is = new ImageStatements();
 
 		try {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
 			byte[] img = is.showImage(id, Integer.toString(user.getId()));
-			response.setContentType("image/jpg");
-            response.setContentLength(img.length);
-            response.getOutputStream().write(img);
+			if (img != null){				
+				response.setContentType("image/jpg");
+				response.setContentLength(img.length);
+				response.getOutputStream().write(img);
+			}
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
-			request.setAttribute("error", "Doh! Please login to see pictures");
+			e.printStackTrace();
 		}
 
 	}

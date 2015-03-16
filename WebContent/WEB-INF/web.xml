@@ -36,6 +36,14 @@
     <servlet-name>ImageController</servlet-name>
     <url-pattern>/image/*</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ViewImageController</servlet-name>
+    <servlet-class>dk.itu.photoshare.controller.ViewImageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewImageController</servlet-name>
+    <url-pattern>/view</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>ImageUploadController</servlet-name>
     <servlet-class>dk.itu.photoshare.controller.ImageUploadController</servlet-class>
@@ -51,14 +59,6 @@
   <servlet-mapping>
     <servlet-name>CreateUserController</servlet-name>
     <url-pattern>/signup</url-pattern>
-  </servlet-mapping>
-    <servlet>
-    <servlet-name>TestController</servlet-name>
-    <servlet-class>dk.itu.photoshare.controller.TestController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TestController</servlet-name>
-    <url-pattern>/test</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>
