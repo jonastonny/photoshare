@@ -43,39 +43,34 @@ public class ImageController extends HttpServlet {
 	 */    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
+
+		String imageId = request.getParameter("id");
+
 		
 		ImageStatements is = new ImageStatements();
-		CommentStatements cs = new CommentStatements();
 
 		try {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
-			Image img = is.showImage(id, Integer.toString(user.getId()));
-			InputStream imgContent = img.getURL().getBinaryStream();
-			OutputStream out = response.getOutputStream();
-			IOUtils.copy(imgContent,out);
 //			response.setContentType("image/jpg");
 			
-			request.setAttribute("image", out);// TODO hardcoded userid, skal tages fra session
-			request.setAttribute("comments", cs.showComment(id));
-			
+			byte[] img = is.showImage(id, Integer.toString(user.getId()));
+			response.setContentType("image/jpg");
+            response.setContentLength(img.length);
+            response.getOutputStream().write(img);
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			request.setAttribute("error", "Doh! Please login to see pictures");
 		}
 
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
-		
-		view.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doGet(request, response);
 	}
 
 }
