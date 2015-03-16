@@ -8,15 +8,15 @@
 <c:if test="${error != null}"><div class="alert alert-warning">${error}</div></c:if>
 
 <div class="form-group">
-	<form method="POST" action="login">
+	<form method="POST" action="signup">
 		
-		<label for="username">Email:</label>
 		<input type="text" id="username" class="form-control" placeholder="Enter username" name="username"><br>
-		
-		<label for="password">Password:</label>
+
 		<input type="password" id="password" class="form-control" placeholder="Enter password" name="password"><br>
 		
-		<input type="submit" value="Login" class="btn btn-default"> or <a href="createuser">Create New User</a>
+		<input type="confirm-password" id="confirm-password" class="form-control" placeholder="Confirm password" name="confirm-password"><br>
+		
+		<input type="submit" value="Sign Up" class="btn btn-success">
 	
 	</form>
 </div>

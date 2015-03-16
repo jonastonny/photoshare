@@ -16,7 +16,7 @@
 		<label for="password">Password:</label>
 		<input type="password" id="password" class="form-control" placeholder="Enter password" name="password"><br>
 		
-		<input type="submit" value="Login" class="btn btn-default"> or <a href="createuser">Create New User</a>
+		<input type="submit" value="Login" class="btn btn-default"> or <a href="signup">Create New User</a>
 	
 	</form>
 </div>
