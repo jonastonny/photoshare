@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS roles (
 	user_id int(11) NOT NULL AUTO_INCREMENT,
 	role varchar(100) NOT NULL,
 	PRIMARY KEY (user_id, role),
-	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS streams (
@@ -64,6 +64,6 @@ CREATE TABLE IF NOT EXISTS streams_images (
  INSERT DUMMY DATA
  */
 INSERT INTO users (username, password) VALUES ('admin', 'abcDEFG123#');
-INSERT INTO roles (user_id, role) VALUES (1, 'admin');
+INSERT INTO roles (user_id, role) VALUES (1, 'admin');	
 
 
