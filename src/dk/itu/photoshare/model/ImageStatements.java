@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
 import dk.itu.photoshare.model.DBConnect;
 
 public class ImageStatements {
@@ -50,6 +49,8 @@ public class ImageStatements {
 			pstmt.setInt(2, Integer.parseInt(user_id));
 			pstmt.setString(3, description);
 			pstmt.executeUpdate();
+			addPermission(user_id);
+			
 			System.out.println("file succesfully uploaded to db");
 		}
 		catch (Exception e) {
@@ -57,21 +58,21 @@ public class ImageStatements {
 		}
 	}
 	
-//	public static String uploadImgToServer(String imageName, String username, InputStream imageContent, String path){
-//		String uniqueID = Integer.toString(imageContent.hashCode());
-//		String fileName =  uniqueID + username + imageName;
-//		String directory = path + fileName;
-//		try {
-//			OutputStream output = new FileOutputStream(directory); 
-//			IOUtils.copy(imageContent, output);
-//			System.out.println("File succesfully uploaded to server");
-//		    output.flush();
-//		    output.close();
-//		    return directory;
-//		} catch (IOException e) {
-//			System.out.println(e);
-//			return null;
-//		}
-//	}
+	/**
+	 * 
+	 * 
+	 * @param user_id
+	 */
+	public void addPermission(String user_id){
+		try {
+			PreparedStatement pstmt = c.preparedStatement("INSERT INTO image_users (image_id, user_id) VALUES((SELECT LAST_INSERT_ID()), ?);");
+			pstmt.setInt(1, Integer.parseInt(user_id));
+			pstmt.executeUpdate();
+			System.out.println("updatet in perm.");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }
