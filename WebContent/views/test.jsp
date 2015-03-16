@@ -14,4 +14,32 @@
 <h3>Hej med jer...</h3>
 <img src="http://localhost:8080/photoshare/image?id=1">
 
+
+	<c:if test="${comments != null}">
+		<table class="table">
+			<tr><th>User</th><th>Comment</th></tr>
+			<c:forEach var="comments" items="${comments}">
+				<tr>
+					<td>
+					<p>${comments.userId}</p>
+					</td>
+					<td>
+					<p>${comments.body}</p>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
+	
+	<div>
+		<form method="POST" action="comment">
+			<textarea class="form-control" name="comment" rows="3" placeholder="Leave a comment..."></textarea>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+	
+	
+
+
+
 </index:wrap>
