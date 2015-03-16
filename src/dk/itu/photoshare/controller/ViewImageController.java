@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dk.itu.photoshare.model.CommentStatements;
+import dk.itu.photoshare.model.Image;
 import dk.itu.photoshare.model.ImageStatements;
 import dk.itu.photoshare.model.User;
 
@@ -54,6 +55,10 @@ public class ViewImageController extends HttpServlet {
 		
 		CommentStatements cs = new CommentStatements();
 		request.setAttribute("comments", cs.showComment(id));
+		request.setAttribute("image", is.getImage(id));
+		
+		
+		
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
 		view.forward(request, response);
