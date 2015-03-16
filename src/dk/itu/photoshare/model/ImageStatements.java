@@ -30,7 +30,7 @@ public class ImageStatements {
 	
 	public Image showImage (String id, String user_id) {
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT images.url AS imageURL, images.description AS imageDescription FROM images WHERE id =? AND user_id =?;");
+			PreparedStatement pstmt = c.preparedStatement("SELECT images.image AS imageURL, images.description AS imageDescription FROM images WHERE id =? AND user_id =?;");
 			pstmt.setString(1, id);
 			pstmt.setString(2, user_id); // TODO hent fra session
 			rs = pstmt.executeQuery();
