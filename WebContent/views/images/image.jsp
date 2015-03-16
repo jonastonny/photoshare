@@ -3,6 +3,7 @@
 
 <image:wrap title="PhotoShare - Image">
 	<h1>Image</h1>
+	<c:if test="${error != null}"><div class="alert alert-warning"><p class="error">${error}</p></div></c:if>
 	<div class="container" align="center">
 		<img src="${image.getURL()}">
 		<p>${image.getDescription()}</p>

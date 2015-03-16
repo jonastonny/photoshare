@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dk.itu.photoshare.model.CommentStatements;
 import dk.itu.photoshare.model.ImageStatements;
+import dk.itu.photoshare.model.User;
 
 /**
  * Servlet implementation class ImageController
@@ -32,13 +34,22 @@ public class ImageController extends HttpServlet {
 	 */    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id = request.getParameter("id");
+		String imageId = request.getParameter("id");
 		
 		ImageStatements is = new ImageStatements();
 		CommentStatements cs = new CommentStatements();
 		
-		request.setAttribute("image", is.showImage(id, "1"));// TODO hardcoded userid, skal tages fra session
-		request.setAttribute("comments", cs.showComment(id));
+		try {
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("user");
+			
+			request.setAttribute("image", is.showImage(imageId, Integer.toString(user.getId())));// TODO hardcoded userid, skal tages fra session
+			request.setAttribute("comments", cs.showComment(imageId));
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			request.setAttribute("error", "Doh! Please login to see pictures");
+		}
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
 		
