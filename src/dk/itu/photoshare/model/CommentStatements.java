@@ -49,7 +49,7 @@ public class CommentStatements {
 		ArrayList<Comment> comments = new ArrayList<Comment>();
 		
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT users.username, comments.body FROM users, comments WHERE users.id = comments.user_id AND comments.image_id=?;");
+			PreparedStatement pstmt = c.preparedStatement("SELECT users.username, comments.body, comments.id FROM users, comments WHERE users.id = comments.user_id AND comments.image_id=? ORDER BY id;");
 			pstmt.setString(1, image_id);
 			rs = pstmt.executeQuery();
 			
