@@ -61,6 +61,7 @@ public class CommentStatements {
 		catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}
+		System.out.println(comments.size());
 		return comments;
 	}
 	
