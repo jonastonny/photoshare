@@ -28,14 +28,14 @@ public class ImageStatements {
         }
     }
 	
-	public Image showImage (String id, String imgPath, String user_id) {
+	public Image showImage (String id, String user_id) {
 		try {
 			PreparedStatement pstmt = c.preparedStatement("SELECT images.url AS imageURL, images.description AS imageDescription FROM images WHERE id =? AND user_id =?;");
 			pstmt.setString(1, id);
 			pstmt.setString(2, user_id); // TODO hent fra session
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				Image i = new Image(imgPath + rs.getString("imageURL"), rs.getString("imageDescription"));
+				Image i = new Image(rs.getString("imageURL"), rs.getString("imageDescription"));
 				return i;
 			}
 		}
@@ -47,34 +47,36 @@ public class ImageStatements {
 	}
 	
 	
-	public void uploadImgToDB(String imgURL, String description, String user_id){
+	
+	public void uploadImgToDB(InputStream img, String description, String user_id){
 		try {
-			PreparedStatement pstmt = c.preparedStatement("INSERT INTO images (url, user_id, description) VALUES(?, ?, ?);");
-			pstmt.setString(1, imgURL);
+			PreparedStatement pstmt = c.preparedStatement("INSERT INTO images (image, user_id, description) VALUES(?, ?, ?);");
+			pstmt.setBlob(1, img);
 			pstmt.setInt(2, Integer.parseInt(user_id));
 			pstmt.setString(3, description);
 			pstmt.executeUpdate();
+			System.out.println("file succesfully uploaded to db");
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
-	public static String uploadImgToServer(String imageName, String username, InputStream imageContent, String path){
-		String uniqueID = Integer.toString(imageContent.hashCode());
-		String fileName =  uniqueID + username + imageName;
-		String directory = path + fileName;
-		try {
-			OutputStream output = new FileOutputStream(directory); 
-			IOUtils.copy(imageContent, output);
-			System.out.println("File succesfully uploaded to server");
-		    output.flush();
-		    output.close();
-		    return fileName;
-		} catch (IOException e) {
-			System.out.println(e);
-			return null;
-		}
-	}
+//	public static String uploadImgToServer(String imageName, String username, InputStream imageContent, String path){
+//		String uniqueID = Integer.toString(imageContent.hashCode());
+//		String fileName =  uniqueID + username + imageName;
+//		String directory = path + fileName;
+//		try {
+//			OutputStream output = new FileOutputStream(directory); 
+//			IOUtils.copy(imageContent, output);
+//			System.out.println("File succesfully uploaded to server");
+//		    output.flush();
+//		    output.close();
+//		    return directory;
+//		} catch (IOException e) {
+//			System.out.println(e);
+//			return null;
+//		}
+//	}
 	
 }
