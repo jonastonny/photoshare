@@ -44,19 +44,13 @@ public class ImageUploadController extends HttpServlet {
 		String description = request.getParameter("description");
 		String user_id = "1";	// hardcoded - will be set by sessionParameter
 		String username = "test"; // hardcoded - will be set by sessionParameter
-		String appPath = request.getServletContext().getRealPath("");	
-	    String savePath = appPath + "/images/";	// construct path of the directory to save uploaded file
 		Part image = request.getPart("image");	// get image
-		System.out.println(image.getSize());
-		
 
-		
 		if(!(image.getSize() <= 0)){
-		    String imgName = getImageName(image);
+		    //String imgName = getImageName(image);
 			InputStream imageContent = image.getInputStream();
 			ImageStatements upload = new ImageStatements();
-			String imgURL = upload.uploadImgToServer(imgName, username, imageContent, savePath);
-			upload.uploadImgToDB(imgURL, description, user_id);
+			upload.uploadImgToDB(imageContent, description, user_id);
 			RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
 			view.forward(request, response);
 		}
