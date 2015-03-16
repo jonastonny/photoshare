@@ -40,7 +40,7 @@ public class CreateUserStatements {
 	
 	private boolean addUserRole(int userId, String role){
 		try {
-			pstmt = c.preparedStatement("INSERT INTO role (user_id, role) VALUES (?, ?)");
+			pstmt = c.preparedStatement("INSERT INTO roles (user_id, role) VALUES (?, ?)");
 			pstmt.setInt(1, userId);
 			pstmt.setString(2, role);
 			pstmt.executeUpdate();
@@ -54,6 +54,7 @@ public class CreateUserStatements {
 	public int getUserId(String username){
 		try {
 			pstmt = c.preparedStatement("SELECT users.id FROM users WHERE users.username = ?");
+			pstmt.setString(1, username);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				return rs.getInt("id");
