@@ -2,6 +2,7 @@ package dk.itu.photoshare.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +43,7 @@ public class CreateCommentController extends HttpServlet {
 		int user_id = user.getId();
 		CommentStatements sm = new CommentStatements();
 		sm.createComment(comment, image_id, user_id);
+		response.sendRedirect("view?id="+image_id);
 	}
 
 }
