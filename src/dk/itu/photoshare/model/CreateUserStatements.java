@@ -3,7 +3,6 @@ package dk.itu.photoshare.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class CreateUserStatements {
 	
@@ -63,6 +62,18 @@ public class CreateUserStatements {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public boolean userExists(String username){
+		try {
+			pstmt = c.preparedStatement("SELECT users.username FROM users WHERE users.username = ?");
+			pstmt.setString(1, username);
+			rs = pstmt.executeQuery();
+			if (rs.next()) return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	

@@ -14,7 +14,7 @@
 
 		<input type="password" id="password" class="form-control" placeholder="Enter password" name="password"><br>
 		
-		<input type="confirm-password" id="confirm-password" class="form-control" placeholder="Confirm password" name="confirm-password"><br>
+		<input type="password" id="confirm-password" class="form-control" placeholder="Confirm password" name="confirm-password"><br>
 		
 		<input type="submit" value="Sign Up" class="btn btn-success">
 	
