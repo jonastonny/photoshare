@@ -41,7 +41,21 @@ public class ImageStatements {
 		return null;
 	}
 	
-	
+	public boolean hasPerm(String userId, String imageId) {
+		try {
+			PreparedStatement pstmt = c.preparedStatement("SELECT user_id FROM image_users WHERE image_id =? AND user_id=?;");
+			pstmt.setString(1, imageId);
+			pstmt.setString(2, userId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
 	
 	public void uploadImgToDB(InputStream img, String description, String user_id){
 		try {
