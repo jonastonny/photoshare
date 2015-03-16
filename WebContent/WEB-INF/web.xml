@@ -52,7 +52,7 @@
     <servlet-name>CreateUserController</servlet-name>
     <url-pattern>/signup</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>TestController</servlet-name>
     <servlet-class>dk.itu.photoshare.controller.TestController</servlet-class>
   </servlet>
