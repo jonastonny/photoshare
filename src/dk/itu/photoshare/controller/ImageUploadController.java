@@ -48,9 +48,7 @@ public class ImageUploadController extends HttpServlet {
 	    String savePath = appPath + "/images/";	// construct path of the directory to save uploaded file
 		Part image = request.getPart("image");	// get image
 		System.out.println(image.getSize());
-		
 
-		
 		if(!(image.getSize() <= 0)){
 		    String imgName = getImageName(image);
 			InputStream imageContent = image.getInputStream();
