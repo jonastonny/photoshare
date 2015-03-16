@@ -29,6 +29,7 @@
 	<div>
 		<form method="POST" action="createcomment">
 			<textarea class="form-control" name="comment" rows="3" placeholder="Leave a comment..."></textarea>
+			<input type="hidden" value="${param.id}" name="id">
 			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
 	</div>
