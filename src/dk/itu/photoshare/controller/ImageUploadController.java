@@ -69,10 +69,10 @@ public class ImageUploadController extends HttpServlet {
 
 		if(!(image.getSize() <= 0)){
 			InputStream imageContent = image.getInputStream();
-			ImageStatements upload = new ImageStatements();
-			upload.uploadImgToDB(imageContent, description, Integer.toString(user.getId()));
-			RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
-			view.forward(request, response);
+			ImageStatements statements = new ImageStatements();
+			statements.uploadImgToDB(imageContent, description, Integer.toString(user.getId()));
+			String image_id = statements.getLastUploadedImageID();
+			response.sendRedirect("view?id="+image_id);
 		}
 		else{
 			System.out.println("No image to upload");

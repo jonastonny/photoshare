@@ -88,6 +88,21 @@ public class ImageStatements {
 		}
 	}
 	
+	public String getLastUploadedImageID(){
+		try {
+			PreparedStatement pstmt = c.preparedStatement("SELECT MAX(id) AS LastID FROM images;");
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				return rs.getString("LastID");
+			}
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("no image recently uploaded");
+			return null;
+		}
+	}
+	
 	/**
 	 * 
 	 * 
@@ -100,7 +115,6 @@ public class ImageStatements {
 			pstmt.executeUpdate();
 			System.out.println("updatet in perm.");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
