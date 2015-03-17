@@ -3,6 +3,25 @@
 
 <image:wrap title="Image">
 	<h1>Image</h1>
+<<<<<<< HEAD
+	<div class="container" align="center">
+		<img src="${image.getURL()}">
+		<p>${image.getDescription()}</p>
+		<p>Comments HERE BITCH</p>
+	</div>
+	<table>
+		<c:forEach var="comments" items="${comments}">
+			<tr>
+				<td>
+				<p>${comments.userId}</p>
+				</td>
+				<td>
+				<p>${comments.body}</p>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+=======
 	<c:if test="${error != null}"><div class="alert alert-warning"><p class="error">${error}</p></div></c:if>
 	
 	<c:if test="${image != null}">
@@ -37,4 +56,5 @@
 		</div>
 	</c:if>
 	
+>>>>>>> 8b7d2343ce27649813e981605b5b7a35d6d60196
 </image:wrap>
