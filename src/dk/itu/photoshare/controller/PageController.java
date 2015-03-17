@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dk.itu.photoshare.model.FlashMessage;
 
@@ -31,6 +32,13 @@ public class PageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		FlashMessage fm = new FlashMessage();
 		fm.getFlashMessage(request, "msg");
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		
 		RequestDispatcher view = request.getRequestDispatcher("views/index.jsp");
 		view.forward(request, response);
 	}
