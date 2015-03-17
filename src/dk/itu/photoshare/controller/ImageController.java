@@ -60,7 +60,6 @@ public class ImageController extends HttpServlet {
 				request.getRequestDispatcher("views/index.jsp").forward(request, response);
 				return;
 			}				
-//			response.setContentType("image/jpg");
 			
 			byte[] img = is.showImage(id, Integer.toString(user.getId()));
 			if (img != null){				

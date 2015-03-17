@@ -26,9 +26,8 @@ public class ImageStatements {
 	
 	public byte[] showImage (String id, String user_id) {
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT images.image AS imageURL, images.description AS imageDescription FROM images WHERE id =? AND user_id =?;");
+			PreparedStatement pstmt = c.preparedStatement("SELECT images.image AS imageURL, images.description AS imageDescription FROM images WHERE id =?;");
 			pstmt.setString(1, id);
-			pstmt.setString(2, user_id); 
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				byte[] content = rs.getBytes("imageURL");
@@ -81,6 +80,8 @@ public class ImageStatements {
 			pstmt.setInt(2, Integer.parseInt(user_id));
 			pstmt.setString(3, description);
 			pstmt.executeUpdate();
+			addPermission(user_id);
+			
 			System.out.println("file succesfully uploaded to db");
 		}
 		catch (Exception e) {
@@ -88,22 +89,47 @@ public class ImageStatements {
 		}
 	}
 	
-//	public static String uploadImgToServer(String imageName, String username, InputStream imageContent, String path){
-//		String uniqueID = Integer.toString(imageContent.hashCode());
-//		String fileName =  uniqueID + username + imageName;
-//		String directory = path + fileName;
-//		try {
-//			OutputStream output = new FileOutputStream(directory); 
-//			IOUtils.copy(imageContent, output);
-//			System.out.println("File succesfully uploaded to server");
-//		    output.flush();
-//		    output.close();
-//		    return directory;
-//		} catch (IOException e) {
-//			System.out.println(e);
-//			return null;
-//		}
-//	}
+	/**
+	 * 
+	 * 
+	 * @param user_id
+	 */
+	public void addPermission(String user_id){
+		try {
+			PreparedStatement pstmt = c.preparedStatement("INSERT INTO image_users (image_id, user_id) VALUES((SELECT LAST_INSERT_ID()), ?);");
+			pstmt.setInt(1, Integer.parseInt(user_id));
+			pstmt.executeUpdate();
+			System.out.println("updatet in perm.");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean sharePermission(String username, int image_id){
+		try {
+			System.out.println(username);
+			PreparedStatement pstmtUser = c.preparedStatement("SELECT id FROM users WHERE username=?;");
+			pstmtUser.setString(1, username);
+			rs = pstmtUser.executeQuery();
+			if(rs.next()) {	// user has been spotted
+				PreparedStatement pstmt = c.preparedStatement("INSERT INTO image_users (image_id, user_id) VALUES(?, ?);");
+				pstmt.setInt(1, image_id);
+				pstmt.setInt(2, Integer.parseInt(rs.getString("id")));
+				pstmt.executeUpdate();
+				System.out.println("user is updated in perm.");
+				return true;
+			}
+			else{
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("new user has not been granted perm");
+			return false;
+		}
+	}
+	
 	
 	
 	public ArrayList<Image> getOwnImagesId(String user_id, String owner){	

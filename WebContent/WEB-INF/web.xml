@@ -36,7 +36,7 @@
     <servlet-name>ImageController</servlet-name>
     <url-pattern>/image/*</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>ViewImageController</servlet-name>
     <servlet-class>dk.itu.photoshare.controller.ViewImageController</servlet-class>
   </servlet>
@@ -52,6 +52,14 @@
     <servlet-name>ImageUploadController</servlet-name>
     <url-pattern>/upload</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ShareImageController</servlet-name>
+    <servlet-class>dk.itu.photoshare.controller.ShareImageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShareImageController</servlet-name>
+    <url-pattern>/share</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>CreateUserController</servlet-name>
     <servlet-class>dk.itu.photoshare.controller.CreateUserController</servlet-class>
@@ -60,8 +68,7 @@
     <servlet-name>CreateUserController</servlet-name>
     <url-pattern>/signup</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>CreateCommentController</servlet-name>
     <servlet-class>dk.itu.photoshare.controller.CreateCommentController</servlet-class>
   </servlet>
@@ -69,8 +76,6 @@
     <servlet-name>CreateCommentController</servlet-name>
     <url-pattern>/createcomment</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.ico</url-pattern>
