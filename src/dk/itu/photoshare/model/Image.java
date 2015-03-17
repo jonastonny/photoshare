@@ -24,4 +24,8 @@ public class Image {
 		return imageDescription;
 	}
 	
+	public String getOwner() {
+		return owner;
+	}
+	
 }

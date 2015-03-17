@@ -32,24 +32,27 @@
 	<c:if test="${user != null}">
 		<div>
 			<form method="POST" action="createcomment">
-				<label>New comment</label>
-				<textarea class="form-control" name="comment" rows="3" placeholder="Leave a comment..."></textarea>
-				<input type="hidden" value="${param.id}" name="id"><br>
-				
-				<button type="submit" class="btn btn-default">Submit</button>
+				<div class="form-group">
+					<label>New comment</label>
+					<textarea class="form-control" name="comment" rows="3" placeholder="Leave a comment..."></textarea>
+					<input type="hidden" value="${param.id}" name="id"><br>
+					
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
 			</form>
 		</div>
 	</c:if>
 	
 	<!-- Hvis brugeren er ejeren af billedet, så... -->
-	<form method="POST" action="share">
-		<div class="form-group">
-			<input type="hidden" value="${param.id}" name="id">
-			<label for="username">Share image with user:</label>
-			<input class="form-control" type="text" name="username" placeholder="Username">
-		</div>
-			<button type="submit" class="btn btn-default">Share</button>
-	</form>
-
+	<c:if test="${image.owner eq user.id }">
+		<form method="POST" action="share">
+			<div class="form-group">
+				<input type="hidden" value="${param.id}" name="id">
+				<label for="username">Share image with user:</label>
+				<input class="form-control" type="text" name="username" placeholder="Username">
+			</div>
+				<button type="submit" class="btn btn-default">Share</button>
+		</form>
+	</c:if>
 </div>
 </image:wrap>
