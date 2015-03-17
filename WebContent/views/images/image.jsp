@@ -1,7 +1,7 @@
 <%@ taglib prefix="image" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<image:wrap title="PhotoShare - Image">
+<image:wrap title="Image">
 	<h1>Image</h1>
 <<<<<<< HEAD
 	<div class="container" align="center">
