@@ -19,6 +19,7 @@
 		   		<li><a href="signup">Sign Up</a></li>
          	</c:when>
          	<c:otherwise>
+         		<li><a href="upload">Upload Image</a></li>
          		<li><a href="logout">Logout</a></li> <!-- LOGGED IN -->
          		<li><p class="navbar-text">Logged in as ${user.username}</p></li>
          	</c:otherwise>
