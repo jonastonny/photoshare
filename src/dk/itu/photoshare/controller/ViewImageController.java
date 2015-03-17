@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import dk.itu.photoshare.model.CommentStatements;
 import dk.itu.photoshare.model.FlashMessage;
-import dk.itu.photoshare.model.Image;
 import dk.itu.photoshare.model.ImageStatements;
 import dk.itu.photoshare.model.User;
 

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dk.itu.photoshare.model.FlashMessage;
 import dk.itu.photoshare.model.LoginStatements;
 import dk.itu.photoshare.model.User;
 
