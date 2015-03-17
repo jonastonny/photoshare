@@ -10,4 +10,9 @@
 <c:if test="${msg != null}"><div class="alert alert-success">${msg}</div></c:if>
 <c:if test="${error != null}"><div class="alert alert-warning">${error}</div></c:if>
 
+	<c:forEach var="images" items="${images}">
+		<p><img src="${images.url}"></p>
+	</c:forEach>
+
+
 </index:wrap>
