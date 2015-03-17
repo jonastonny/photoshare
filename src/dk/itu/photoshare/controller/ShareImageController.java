@@ -45,7 +45,7 @@ public class ShareImageController extends HttpServlet {
 			message.sendFlashMessage(request, "image shared with: " + shareToUser, "msg");
 		}
 		else{
-			message.sendFlashMessage(request, "You can't share to non-existing user: " + shareToUser, "msg");
+			message.sendFlashMessage(request, "You can't share to non-existing user: " + shareToUser, "error");
 		}
 		response.sendRedirect("view?id="+image_id);
 	}
