@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.util.ArrayList;
 
 import dk.itu.photoshare.model.DBConnect;
 
@@ -105,4 +105,36 @@ public class ImageStatements {
 //		}
 //	}
 	
+	
+	public ArrayList<Image> getOwnImagesId(String user_id, String owner){	
+		ArrayList <Image> results = new ArrayList<Image>();
+		try {
+			PreparedStatement pstmt = c.preparedStatement("SELECT `image` FROM `photostream`.`images` WHERE user_id=");
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()){
+				results.add(new Image("view?id="+rs.getString("imageId"), rs.getString("description"), rs.getString("user_Id")));
+			}
+		
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return results;
+	
+	}
+	
+	/*public Image getImages(String image_id){
+	
+	try{
+		PreparedStatement pstmt = c.preparedStatement("SELECT `image` AS image FROM `photostream`.`images` WHERE image_id=?;");
+		pstmt.setString(1, image_id);
+		rs = pstmt.executeQuery();
+	}
+	catch (Exception e) {
+		System.out.println(e.getMessage());
+	}
+		return (Image) rs;
+	}*/
 }
