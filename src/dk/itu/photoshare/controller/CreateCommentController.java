@@ -45,5 +45,5 @@ public class CreateCommentController extends HttpServlet {
 		sm.createComment(comment, image_id, user_id);
 		response.sendRedirect("view?id="+image_id);
 	}
-
+	
 }
