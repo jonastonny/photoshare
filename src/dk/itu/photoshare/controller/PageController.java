@@ -1,6 +1,7 @@
 package dk.itu.photoshare.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dk.itu.photoshare.model.FlashMessage;
+import dk.itu.photoshare.model.Image;
 import dk.itu.photoshare.model.ImageStatements;
 import dk.itu.photoshare.model.User;
 
@@ -38,16 +40,17 @@ public class PageController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		}
+
+		ImageStatements is = new ImageStatements();
+		User user = (User) session.getAttribute("user");
+		ArrayList <Image> images = is.getOwnImages(Integer.toString(user.getId()));
+		request.setAttribute("images", images);
+		
 		
 		FlashMessage fm = new FlashMessage();
 		fm.getFlashMessage(request, "msg");
 		RequestDispatcher view = request.getRequestDispatcher("views/index.jsp");
 		view.forward(request, response);
-		
-		ImageStatements is = new ImageStatements();
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		
 	
 	}
 

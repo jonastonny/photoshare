@@ -132,15 +132,15 @@ public class ImageStatements {
 	
 	
 	
-	public ArrayList<Image> getOwnImagesId(String user_id, String owner){	
+	public ArrayList<Image> getOwnImages(String user_id){	
 		ArrayList <Image> results = new ArrayList<Image>();
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT `image` FROM `photostream`.`images` WHERE user_id=");
+			PreparedStatement pstmt = c.preparedStatement("SELECT id, descripton FROM photoshare.images WHERE user_id =?");
 			pstmt.setString(1, user_id);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()){
-				results.add(new Image("view?id="+rs.getString("imageId"), rs.getString("description"), rs.getString("user_Id")));
+				results.add(new Image("view?id="+rs.getString("imageId"), rs.getString("description"), user_id));
 			}
 		
 		}
