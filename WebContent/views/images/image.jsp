@@ -48,8 +48,5 @@
 		</div>
 			<button type="submit" class="btn btn-default">Share</button>
 	</form>
-	
-	
-	
 
 </image:wrap>
