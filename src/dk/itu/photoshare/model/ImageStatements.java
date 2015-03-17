@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import dk.itu.photoshare.model.DBConnect;
 
@@ -144,4 +145,40 @@ public class ImageStatements {
 	}
 	
 	
+	
+	public ArrayList<Image> getOwnImages(String user_id){	
+		ArrayList <Image> results = new ArrayList<Image>();
+		try {
+			PreparedStatement pstmt = c.preparedStatement("SELECT id, description FROM photoshare.images WHERE user_id =?");
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()){
+				results.add(new Image(rs.getString("id"), rs.getString("description"), user_id));
+			}
+		
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return results;
+	}
+	
+	public ArrayList<Image> getImagesSharedWithMe(String user_id){
+		ArrayList <Image> results = new ArrayList<Image>();
+		try {
+			PreparedStatement pstmt = c.preparedStatement("SELECT image_id, images.description FROM images, (SELECT image_id FROM image_users WHERE image_users.image_id NOT IN (SELECT images.id FROM images WHERE user_id = ?) AND image_users.user_id = ?) AS result WHERE images.id = result.image_id;");
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, user_id);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()){
+				results.add(new Image(rs.getString("image_id"), rs.getString("description"), user_id));
+			}
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return results;
+	}
 }
