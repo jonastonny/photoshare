@@ -7,7 +7,7 @@
 
 <div class="row">
 	<c:if test="${msg != null}"><div class="alert alert-success">${msg}</div></c:if>
-	<c:if test="${error != null}"><div class="alert alert-warning">${error}</div></c:if>
+	<c:if test="${error != null}"><div class="alert alert-danger">${error}</div></c:if>
 	
 	<h3>My Pictures</h3>
 	<c:choose>

@@ -3,8 +3,8 @@
 
 <image:wrap title="Image">
 <div class="row">
-	<c:if test="${error != null}"><div class="alert alert-warning">${error}</div></c:if>
-	<c:if test="${msg != null}"><div class="alert alert-warning">${msg}</div></c:if>
+	<c:if test="${error != null}"><div class="alert alert-danger">${error}</div></c:if>
+	<c:if test="${msg != null}"><div class="alert alert-success">${msg}</div></c:if>
 	
 	<c:if test="${image != null}">
 	<h1 style="text-align:center">${image.description}</h1>
