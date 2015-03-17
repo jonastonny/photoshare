@@ -25,9 +25,8 @@ public class ImageStatements {
 	
 	public byte[] showImage (String id, String user_id) {
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT images.image AS imageURL, images.description AS imageDescription FROM images WHERE id =? AND user_id =?;");
+			PreparedStatement pstmt = c.preparedStatement("SELECT images.image AS imageURL, images.description AS imageDescription FROM images WHERE id =?;");
 			pstmt.setString(1, id);
-			pstmt.setString(2, user_id); 
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				byte[] content = rs.getBytes("imageURL");
@@ -106,21 +105,27 @@ public class ImageStatements {
 		}
 	}
 	
-	public void sharePermission(String username, int image_id){
+	public boolean sharePermission(String username, int image_id){
 		try {
-			PreparedStatement pstmtUser = c.preparedStatement("SELECT user_id FROM users WHERE username=?;");
+			System.out.println(username);
+			PreparedStatement pstmtUser = c.preparedStatement("SELECT id FROM users WHERE username=?;");
 			pstmtUser.setString(1, username);
-			rs = pstmt.executeQuery();
+			rs = pstmtUser.executeQuery();
 			if(rs.next()) {	// user has been spotted
 				PreparedStatement pstmt = c.preparedStatement("INSERT INTO image_users (image_id, user_id) VALUES(?, ?);");
 				pstmt.setInt(1, image_id);
-				pstmt.setInt(2, Integer.parseInt(rs.getString("user_id")));
+				pstmt.setInt(2, Integer.parseInt(rs.getString("id")));
 				pstmt.executeUpdate();
 				System.out.println("user is updated in perm.");
+				return true;
+			}
+			else{
+				return false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("new user has been granted perm");
+			System.out.println("new user has not been granted perm");
+			return false;
 		}
 	}
 	

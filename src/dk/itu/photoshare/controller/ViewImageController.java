@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dk.itu.photoshare.model.CommentStatements;
+import dk.itu.photoshare.model.FlashMessage;
 import dk.itu.photoshare.model.Image;
 import dk.itu.photoshare.model.ImageStatements;
 import dk.itu.photoshare.model.User;
@@ -36,6 +37,7 @@ public class ViewImageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id = request.getParameter("id");
+		new FlashMessage().getFlashMessage(request, "msg");
 		
 		ImageStatements is = new ImageStatements();
 		HttpSession session = request.getSession();

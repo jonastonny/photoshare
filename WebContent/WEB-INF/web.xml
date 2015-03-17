@@ -52,6 +52,14 @@
     <servlet-name>ImageUploadController</servlet-name>
     <url-pattern>/upload</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ShareImageController</servlet-name>
+    <servlet-class>dk.itu.photoshare.controller.ShareImageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShareImageController</servlet-name>
+    <url-pattern>/share</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>CreateUserController</servlet-name>
     <servlet-class>dk.itu.photoshare.controller.CreateUserController</servlet-class>
