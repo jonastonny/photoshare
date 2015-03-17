@@ -6,8 +6,6 @@
 <index:wrap title="PhotoShare">
 
 <div class="row">
-	<h1>Photoshare 2000</h1>
-	
 	<c:if test="${msg != null}"><div class="alert alert-success">${msg}</div></c:if>
 	<c:if test="${error != null}"><div class="alert alert-warning">${error}</div></c:if>
 	
