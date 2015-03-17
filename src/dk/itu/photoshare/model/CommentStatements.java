@@ -34,7 +34,6 @@ public class CommentStatements {
 				result = rs.getInt("image_id");
 			}
 			
-			System.out.println("I have now counted the comments");
 			return result; 
 			
 		} catch (Exception e) {
@@ -63,7 +62,6 @@ public class CommentStatements {
 		catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}
-		System.out.println(comments.size());
 		return comments;
 	}
 	
@@ -83,7 +81,6 @@ public class CommentStatements {
 			pstmt.setInt(2, image_id);
 			pstmt.setInt(3, user_id);
 			pstmt.executeUpdate();
-			System.out.println("comment added to db");
 		}catch(Exception e){
 			System.out.println(e);
 		}
