@@ -58,7 +58,7 @@ public class ImageUploadController extends HttpServlet {
 		User user = (User) s.getAttribute("user");
 		if(user == null){
 			request.setAttribute("error", "You need to login to upload idiot!");
-			RequestDispatcher view = request.getRequestDispatcher("views/index.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/user/login.jsp");
 			view.forward(request, response);
 			return;
 		}
@@ -68,7 +68,6 @@ public class ImageUploadController extends HttpServlet {
 		Part image = request.getPart("image");	// get image
 
 		if(!(image.getSize() <= 0)){
-		    //String imgName = getImageName(image);
 			InputStream imageContent = image.getInputStream();
 			ImageStatements upload = new ImageStatements();
 			upload.uploadImgToDB(imageContent, description, Integer.toString(user.getId()));
