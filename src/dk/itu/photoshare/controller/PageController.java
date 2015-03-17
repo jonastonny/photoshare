@@ -30,8 +30,6 @@ public class PageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		FlashMessage fm = new FlashMessage();
-		fm.getFlashMessage(request, "msg");
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user") == null) {
@@ -39,6 +37,8 @@ public class PageController extends HttpServlet {
 			return;
 		}
 		
+		FlashMessage fm = new FlashMessage();
+		fm.getFlashMessage(request, "msg");
 		RequestDispatcher view = request.getRequestDispatcher("views/index.jsp");
 		view.forward(request, response);
 	}
