@@ -75,7 +75,6 @@ public class ImageUploadController extends HttpServlet {
 			response.sendRedirect("view?id="+image_id);
 		}
 		else{
-			System.out.println("No image to upload");
 			request.setAttribute("error", "An error occurred, please try uploading youre image again");
 			RequestDispatcher view = request.getRequestDispatcher("views/images/upload.jsp");
 			view.forward(request, response);
@@ -96,7 +95,6 @@ public class ImageUploadController extends HttpServlet {
 				return imageName;
 			}
 		}
-		System.out.println("empty file");
 		return null;
 	}
 

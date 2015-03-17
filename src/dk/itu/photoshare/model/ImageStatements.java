@@ -99,7 +99,6 @@ public class ImageStatements {
 			return null;
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("no image recently uploaded");
 			return null;
 		}
 	}
@@ -114,7 +113,6 @@ public class ImageStatements {
 			PreparedStatement pstmt = c.preparedStatement("INSERT INTO image_users (image_id, user_id) VALUES((SELECT LAST_INSERT_ID()), ?);");
 			pstmt.setInt(1, Integer.parseInt(user_id));
 			pstmt.executeUpdate();
-			System.out.println("updatet in perm.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -131,7 +129,6 @@ public class ImageStatements {
 				pstmt.setInt(1, image_id);
 				pstmt.setInt(2, Integer.parseInt(rs.getString("id")));
 				pstmt.executeUpdate();
-				System.out.println("user is updated in perm.");
 				return true;
 			}
 			else{
@@ -139,7 +136,6 @@ public class ImageStatements {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("new user has not been granted perm");
 			return false;
 		}
 	}
