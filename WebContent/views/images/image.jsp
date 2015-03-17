@@ -5,9 +5,10 @@
 	<h1>Image</h1>
 	<c:if test="${error != null}"><div class="alert alert-warning"><p class="error">${error}</p></div></c:if>
 	
-	<c:if test="${param.id != null}">
+	<c:if test="${image != null}">
 		<div class="container" align="center">
-			<img src="image?id=${param.id}" class="img-responsive" alt="Responsive image">
+			<img src="${image.url}" class="img-responsive" alt="Responsive image">
+		<p>${image.description}</p>
 		</div>
 	</c:if>
 	<c:if test="${comments != null}">
@@ -25,4 +26,15 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	
+	<c:if test="${user != null}">
+		<div>
+			<form method="POST" action="createcomment">
+				<textarea class="form-control" name="comment" rows="3" placeholder="Leave a comment..."></textarea>
+				<input type="hidden" value="${param.id}" name="id">
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</div>
+	</c:if>
+	
 </image:wrap>
