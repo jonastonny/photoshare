@@ -21,7 +21,7 @@
          	<c:otherwise>
          		<li><a href="upload">Upload Image</a></li>
          		<li><a href="logout">Logout</a></li> <!-- LOGGED IN -->
-         		<li><p class="navbar-text">Logged in as ${user.username}</p></li>
+         		<li><p class="navbar-text">Logged in as <b>${user.username}</b></p></li>
          	</c:otherwise>
          </c:choose>
          </ul>
