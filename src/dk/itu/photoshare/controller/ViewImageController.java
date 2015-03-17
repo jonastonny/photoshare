@@ -1,9 +1,6 @@
 package dk.itu.photoshare.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Blob;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,73 +10,65 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-
 import dk.itu.photoshare.model.CommentStatements;
 import dk.itu.photoshare.model.Image;
 import dk.itu.photoshare.model.ImageStatements;
-
-
-
 import dk.itu.photoshare.model.User;
 
-
 /**
- * Servlet implementation class ImageController
+ * Servlet implementation class ViewImageController
  */
-@WebServlet("/ImageController")
-public class ImageController extends HttpServlet {
+@WebServlet("/ViewImageController")
+public class ViewImageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ImageController() {
+    public ViewImageController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */    
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String id = request.getParameter("id");
+		
 		ImageStatements is = new ImageStatements();
-
-		try {
-			HttpSession session = request.getSession();
-			User user = (User) session.getAttribute("user");
-			
-			if(user == null) {
-				request.setAttribute("error", "U no user");
-				request.getRequestDispatcher("views/index.jsp").forward(request, response);
-				return;
-			}
-			
-			if(!is.hasPerm(Integer.toString(user.getId()), id)) {
-				request.setAttribute("error", "Has no perm");
-				request.getRequestDispatcher("views/index.jsp").forward(request, response);
-				return;
-			}				
-//			response.setContentType("image/jpg");
-			
-			byte[] img = is.showImage(id, Integer.toString(user.getId()));
-			if (img != null){				
-				response.setContentType("image/jpg");
-				response.setContentLength(img.length);
-				response.getOutputStream().write(img);
-			}
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		if(user == null) {
+			request.setAttribute("error", "U no user");
+			request.getRequestDispatcher("views/index.jsp").forward(request, response);
+			return;
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		
+		if(!is.hasPerm(Integer.toString(user.getId()), id)) {
+			request.setAttribute("error", "Has no perm");
+			request.getRequestDispatcher("views/index.jsp").forward(request, response);
+			return;
+		}			
+		
+		CommentStatements cs = new CommentStatements();
+		request.setAttribute("comments", cs.showComment(id));
+		request.setAttribute("image", is.getImage(id));
+		
+		
+		
+		
+		RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
+		view.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		// TODO Auto-generated method stub
 	}
 
 }

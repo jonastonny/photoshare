@@ -9,19 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dk.itu.photoshare.model.FlashMessage;
+import dk.itu.photoshare.model.CommentStatements;
+import dk.itu.photoshare.model.User;
 
 /**
- * Servlet implementation class PageController
+ * Servlet implementation class CreateCommentController
  */
-@WebServlet("/")
-public class PageController extends HttpServlet {
+@WebServlet("/CreateCommentController")
+public class CreateCommentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PageController() {
+    public CreateCommentController() {
         super();
     }
 
@@ -29,17 +30,20 @@ public class PageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		FlashMessage fm = new FlashMessage();
-		fm.getFlashMessage(request, "msg");
-		RequestDispatcher view = request.getRequestDispatcher("views/index.jsp");
-		view.forward(request, response);
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String comment = request.getParameter("comment");
+		int image_id = Integer.parseInt(request.getParameter("id"));
+		User user = (User) request.getSession().getAttribute("user");
+		int user_id = user.getId();
+		CommentStatements sm = new CommentStatements();
+		sm.createComment(comment, image_id, user_id);
+		response.sendRedirect("view?id="+image_id);
 	}
 
 }

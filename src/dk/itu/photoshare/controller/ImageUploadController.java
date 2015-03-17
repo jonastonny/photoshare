@@ -17,7 +17,8 @@ import dk.itu.photoshare.model.ImageStatements;
  * Servlet implementation class ImageController
  */
 @WebServlet("/ImageUploadController")
-@MultipartConfig
+@MultipartConfig(maxFileSize=1024*1024*10,      // 10MB
+                 maxRequestSize=1024*1024*50)
 public class ImageUploadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,19 +44,21 @@ public class ImageUploadController extends HttpServlet {
 		String description = request.getParameter("description");
 		String user_id = "1";	// hardcoded - will be set by sessionParameter
 		String username = "test"; // hardcoded - will be set by sessionParameter
-		String appPath = request.getServletContext().getRealPath("");	
-	    String savePath = appPath + "/images/";	// construct path of the directory to save uploaded file
 		Part image = request.getPart("image");	// get image
-		
-		if(image != null){
-		    String imgName = getImageName(image);
+
+		if(!(image.getSize() <= 0)){
+		    //String imgName = getImageName(image);
 			InputStream imageContent = image.getInputStream();
 			ImageStatements upload = new ImageStatements();
-			String imgURL = upload.uploadImgToServer(imgName, username, imageContent, savePath);
-			upload.uploadImgToDB(imgURL, description, user_id);
+			upload.uploadImgToDB(imageContent, description, user_id);
+			RequestDispatcher view = request.getRequestDispatcher("views/images/image.jsp");
+			view.forward(request, response);
 		}
 		else{
-		System.out.println("The image wasn't chosen to be uploaded");
+			System.out.println("No image to upload");
+			request.setAttribute("error", "An error occurred, please try uploading youre image again");
+			RequestDispatcher view = request.getRequestDispatcher("views/images/upload.jsp");
+			view.forward(request, response);
 		}
 	}
 	

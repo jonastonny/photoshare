@@ -3,6 +3,7 @@ package dk.itu.photoshare.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CommentStatements {
@@ -50,36 +51,42 @@ public class CommentStatements {
 		ArrayList<Comment> comments = new ArrayList<Comment>();
 		
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT user_id AS userid, body AS comment FROM comments WHERE image_id=? ;");
+			PreparedStatement pstmt = c.preparedStatement("SELECT users.username, comments.body, comments.id FROM users, comments WHERE users.id = comments.user_id AND comments.image_id=? ORDER BY id;");
 			pstmt.setString(1, image_id);
 			rs = pstmt.executeQuery();
-
+			
 			while(rs.next()) {
-				String username = getUserName(rs.getString("userid"));
-				System.out.println(username);
-				comments.add(new Comment(username, rs.getString("comment")));
+				comments.add(new Comment(rs.getString("users.username"), rs.getString("comments.body")));
 			}
 						
 		}
 		catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}
+		System.out.println(comments.size());
 		return comments;
 	}
 	
-	public String getUserName (String userId) {
+	public void deleteComment() {
 		try {
-			PreparedStatement pstmt = c.preparedStatement("SELECT username FROM users WHERE id=?;");
-			pstmt.setString(1, userId);
-			rs = pstmt.executeQuery();
-			if(rs.next()){
-				String username = rs.getString("username");
-				return username;
-			}
+			PreparedStatement pstmt = c.preparedStatement("DELETE FROM comments WHERE comment.id=? AND ;");
 		}
-		catch (Exception e1) {
+		catch(Exception e1) {
 			System.out.println(e1.getMessage());
 		}
-		return "no username";
 	}
+	
+	public void createComment(String comment, int image_id, int user_id) {
+		try{
+			PreparedStatement pstmt = c.preparedStatement("INSERT INTO comments (body, image_id, user_id) VALUES (?,?,?)");
+			pstmt.setString(1, comment);
+			pstmt.setInt(2, image_id);
+			pstmt.setInt(3, user_id);
+			pstmt.executeUpdate();
+			System.out.println("comment added to db");
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
+	
 }

@@ -20,6 +20,7 @@
          	</c:when>
          	<c:otherwise>
          		<li><a href="logout">Logout</a></li> <!-- LOGGED IN -->
+         		<li><p class="navbar-text">Logged in as ${user.username}</p></li>
          	</c:otherwise>
          </c:choose>
          </ul>

@@ -2,21 +2,22 @@ package dk.itu.photoshare.model;
 
 public class Image {
 	
-	String imageURL;
+	String url;
+	String owner;
 	String imageDescription;
 	
-	public Image(String url, String description) {
-		imageURL = url;
+	public Image(String url, String description, String userId) {
+		this.url = url;
 		imageDescription = description;
+		owner = userId;
 	}
 	
 	public Image(){
-		imageURL = "images/ctrlpee.png";
 		imageDescription = "ERROR";
 	}
 	
-	public String getURL() {
-		return imageURL;
+	public String getUrl() {
+		return url;
 	}
 	
 	public String getDescription() {
