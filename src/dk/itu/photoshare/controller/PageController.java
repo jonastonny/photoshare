@@ -44,7 +44,9 @@ public class PageController extends HttpServlet {
 		ImageStatements is = new ImageStatements();
 		User user = (User) session.getAttribute("user");
 		ArrayList <Image> images = is.getOwnImages(Integer.toString(user.getId()));
+		ArrayList <Image> imagesSharedWithMe = is.getImagesSharedWithMe(Integer.toString(user.getId()));
 		request.setAttribute("images", images);
+		request.setAttribute("imagesSharedWithMe", imagesSharedWithMe);
 		
 		
 		FlashMessage fm = new FlashMessage();

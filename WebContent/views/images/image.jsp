@@ -9,7 +9,7 @@
 	<c:if test="${image != null}">
 	<h1 style="text-align:center">${image.description}</h1>
 		
-			<img src="${image.url}" class="img-responsive center-block" alt="Responsive image"><br>
+			<img src="${image.id}" class="img-responsive center-block" alt="Responsive image"><br>
 	</c:if>
 </div>
 <div class="row">

@@ -2,12 +2,12 @@ package dk.itu.photoshare.model;
 
 public class Image {
 	
-	String url;
+	String id;
 	String owner;
 	String imageDescription;
 	
-	public Image(String url, String description, String userId) {
-		this.url = url;
+	public Image(String id, String description, String userId) {
+		this.id = id;
 		imageDescription = description;
 		owner = userId;
 	}
@@ -16,8 +16,8 @@ public class Image {
 		imageDescription = "ERROR";
 	}
 	
-	public String getUrl() {
-		return url;
+	public String getId() {
+		return id;
 	}
 	
 	public String getDescription() {

@@ -140,7 +140,7 @@ public class ImageStatements {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()){
-				results.add(new Image("image?id="+rs.getString("id"), rs.getString("description"), user_id));
+				results.add(new Image(rs.getString("id"), rs.getString("description"), user_id));
 			}
 		
 		}
@@ -148,19 +148,23 @@ public class ImageStatements {
 			System.out.println(e.getMessage());
 		}
 		return results;
-	
 	}
 	
-	/*public Image getImages(String image_id){
-	
-	try{
-		PreparedStatement pstmt = c.preparedStatement("SELECT `image` AS image FROM `photostream`.`images` WHERE image_id=?;");
-		pstmt.setString(1, image_id);
-		rs = pstmt.executeQuery();
+	public ArrayList<Image> getImagesSharedWithMe(String user_id){
+		ArrayList <Image> results = new ArrayList<Image>();
+		try {
+			PreparedStatement pstmt = c.preparedStatement("SELECT image_id, images.description FROM images, (SELECT image_id FROM image_users WHERE image_users.image_id NOT IN (SELECT images.id FROM images WHERE user_id = ?) AND image_users.user_id = ?) AS result WHERE images.id = result.image_id;");
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, user_id);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()){
+				results.add(new Image(rs.getString("image_id"), rs.getString("description"), user_id));
+			}
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return results;
 	}
-	catch (Exception e) {
-		System.out.println(e.getMessage());
-	}
-		return (Image) rs;
-	}*/
 }
