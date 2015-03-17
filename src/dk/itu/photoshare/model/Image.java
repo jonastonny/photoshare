@@ -28,4 +28,8 @@ public class Image {
 		return owner;
 	}
 	
+	public String getOwner() {
+		return owner;
+	}
+	
 }
