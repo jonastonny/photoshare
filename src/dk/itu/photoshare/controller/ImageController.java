@@ -59,7 +59,7 @@ public class ImageController extends HttpServlet {
 				request.setAttribute("error", "Has no perm");
 				request.getRequestDispatcher("views/index.jsp").forward(request, response);
 				return;
-			}				
+			}
 			
 			byte[] img = is.showImage(id, Integer.toString(user.getId()));
 			if (img != null){				

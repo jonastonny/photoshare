@@ -13,7 +13,7 @@
 	<c:choose>
 	<c:when test="${images.size() ne 0}">
 		<c:forEach var="image" items="${images}">
-			<div class="col-md-4"><a href="view?id=${image.id}"><img src="image?id=${image.id}" class="img-responsive center-block" title="${image.description}" alt="${image.description}"></a></div>
+			<div style="padding:5px" class="col-md-4"><a href="view?id=${image.id}"><img src="image?id=${image.id}" class="img-responsive center-block" title="${image.description}" alt="${image.description}"></a></div>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>

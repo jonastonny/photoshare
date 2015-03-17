@@ -51,6 +51,7 @@ public class PageController extends HttpServlet {
 		
 		FlashMessage fm = new FlashMessage();
 		fm.getFlashMessage(request, "msg");
+		fm.getFlashMessage(request, "error");
 		RequestDispatcher view = request.getRequestDispatcher("views/index.jsp");
 		view.forward(request, response);
 	

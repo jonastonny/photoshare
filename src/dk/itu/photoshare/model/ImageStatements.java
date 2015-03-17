@@ -73,6 +73,34 @@ public class ImageStatements {
 		return false;
 	}
 	
+	public boolean isOwner(String userId, String imageId) {
+		try {
+			PreparedStatement pstmt = c.preparedStatement("SELECT user_id FROM images WHERE images.id=?;");
+			pstmt.setString(1, imageId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if (rs.getString("user_id").equals(userId)) return true;
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	public boolean deleteImage(String imageId) {
+		try {
+			PreparedStatement pstmt = c.preparedStatement("DELETE FROM images WHERE images.id=?;");
+			pstmt.setString(1, imageId);
+			pstmt.executeUpdate();
+			return true;
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
 	public void uploadImgToDB(InputStream img, String description, String user_id){
 		try {
 			PreparedStatement pstmt = c.preparedStatement("INSERT INTO images (image, user_id, description) VALUES(?, ?, ?);");
@@ -81,8 +109,6 @@ public class ImageStatements {
 			pstmt.setString(3, description);
 			pstmt.executeUpdate();
 			addPermission(user_id);
-			
-			System.out.println("file succesfully uploaded to db");
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());

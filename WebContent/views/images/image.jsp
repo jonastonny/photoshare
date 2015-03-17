@@ -54,6 +54,11 @@
 				</div>
 					<button type="submit" class="btn btn-default">Share</button>
 			</form>
+			
+			<form method="POST" action="delete">
+				<input type="hidden" value="${param.id}" name="id">
+				<input type="submit" class="btn btn-danger" value="Delete photo">
+			</form>
 		</c:when>
 		<c:otherwise>
 			<div class="text-center">You can only share you own images!</div>
