@@ -5,9 +5,10 @@
 	<h1>Image</h1>
 	<c:if test="${error != null}"><div class="alert alert-warning"><p class="error">${error}</p></div></c:if>
 	
-	<c:if test="${param.id != null}">
+	<c:if test="${image != null}">
 		<div class="container" align="center">
-			<img src="image?id=${param.id}" class="img-responsive" alt="Responsive image">
+			<img src="${image.url}" class="img-responsive" alt="Responsive image">
+		<p>${image.description}</p>
 		</div>
 	</c:if>
 	<c:if test="${comments != null}">

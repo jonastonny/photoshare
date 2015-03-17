@@ -40,6 +40,23 @@ public class ImageStatements {
 		return null;
 	}
 	
+	public Image getImage(String image_id){
+		try {
+			PreparedStatement pstmt = c.preparedStatement("SELECT images.description, images.user_id FROM images WHERE images.id = ?");
+			pstmt.setString(1, image_id); 
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				Image img = new Image("image?id="+image_id, rs.getString("description"), rs.getString("user_id"));
+				return img;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	public boolean hasPerm(String userId, String imageId) {
 		try {
 			PreparedStatement pstmt = c.preparedStatement("SELECT user_id FROM image_users WHERE image_id =? AND user_id=?;");
