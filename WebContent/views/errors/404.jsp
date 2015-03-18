@@ -3,7 +3,6 @@
 <errors:wrap title="Error...">
 <h1>404 - We are really sorry...</h1>
 <div class="alert alert-danger">
-	<span class="glyphicon glyphicon-exclamation-sign"></span>
 	We could not find the page you were looking for...
 </div>
 </errors:wrap>
