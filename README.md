@@ -1,4 +1,4 @@
-# photoshare
+# Photoshare
 A photo sharing service
 
-A photo sharing service build by Niels Dawartz, Jonas Lomholdt and Jonas Tonny Nielsen as part of a course at IT University of Copenhagen.
+A photo sharing service build by Niels Dawartz, Jonas Lomholdt, Nicklas Frederiksen and Jonas Tonny Nielsen as part of a course (System Architecture and Security) at IT University of Copenhagen.
